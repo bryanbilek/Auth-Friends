@@ -13,7 +13,7 @@ const Login = () => {
   const { history } = useHistory();
 
   const handleChanges = e => {
-    setUser({ [e.target.name]: e.target.value });
+    setUser({...user, [e.target.name]: e.target.value });
   };
 
   const onSubmit = (data, e) => {
@@ -22,9 +22,10 @@ const Login = () => {
       .post("/api/login", data)
       .then(res => {
         // res
-        console.log(res);
-        localStorage.setItem("token", JSON.stringify(res.data.payload));
-        history.push("/protected");
+        console.log(res)
+        localStorage.setItem("token", JSON.stringify(res.data.payload))
+        history.push("/protected")
+        e.target.reset()
       })
       .catch(err => console.log(err.response));
   };

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 const NewFriendForm = () => {
@@ -10,7 +9,7 @@ const NewFriendForm = () => {
     email: ""
   });
 
-  const { register, handleSubmit, reset } = useForm();
+  const { register, handleSubmit } = useForm();
 
   const handleChanges = e => {
     setNewFriend({ ...newFriend, [e.target.name]: e.target.value });
@@ -23,7 +22,7 @@ const NewFriendForm = () => {
         .then(res => {
           // res
           console.log(res); 
-          setNewFriend(res.data)         
+          e.target.reset()        
         })
         .catch(err => console.log(err.response));
     };
